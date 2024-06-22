@@ -1,0 +1,13 @@
+body{
+    overflow-x: hidden;
+}
+
+.item{
+    width: 300px;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+}
+.addItemParent{
+cursor: pointer;
+}
