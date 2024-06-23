@@ -35,7 +35,7 @@ function renderProducts() {
   for (var i = 0; i < uploadItems.length; i++) {
     var obj = uploadItems[i];
     addItemParent.innerHTML += `
-     <div id = ${obj.id} class="card" onclick="productDetail(this)">
+     <div id = ${obj.id} class="card  justify-content-around style="width: 18rem;" onclick="productDetail(this) ">
      <img id="productImg" src="${obj.productImg}" class="card-img-top" alt="..." width="100px">
      <div class="card-body">
         <h4 id="productTitle" class="card-title">${obj.productTitle}</h4>
@@ -49,8 +49,9 @@ function getData() {
   onValue(reference, function (dt) {
     uploadItems = Object.values(dt.val());
     renderProducts();
-  
   });
+
+
 }
 getData();
 
@@ -59,3 +60,4 @@ window.productDetail = function(ele){
   localStorage.setItem("productid", ele.id)
   window.location.assign("./pages/productdetail/productdetail.html")
 }
+
