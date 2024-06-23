@@ -1,51 +1,45 @@
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { auth } from "../../js/firebase.js";
+import {createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const signupForm = document.getElementById("signupForm");
 
 signupForm.addEventListener("submit", signup);
 
-async function signup() {
+async function signup(event) {
+  event.preventDefault();
   console.log("running signup");
 
-  var userName = document.getElementById("userName");
-  var email = document.getElementById("email");
-  var password = document.getElementById("password");
+  const data = new FormData(event.target);
+  const userName = document.getElementById("userName").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-  console.log("userName", userName.value);
-  console.log("email", email.value);
-  console.log("password", password.value);
 
-  const result = await createUserWithEmailAndPassword(auth, email, password);
-  console.log("🚀 ~ form.addEventListener ~ result:", result);
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+  try {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    console.log("🚀 ~ form.addEventListener ~ result:", result)
+signupForm.reset();
+if (result) {
+  window.location.href = "../uploadproduct/uploadproduct.html";
+} else {
 }
-// signupform.addEventListener("submit",  async(e) => {
-//   e.preventDefault();
-
-//   const data = new FormData(e.target);
-//   const userName = data.get("userName");
-//   const email = data.get("email");
-//   const password = data.get("password");
-
-// let signup = document.getElementById("signup");
-
-// signup.addEventListener("click",function(){
-
-//   var userName = document.getElementById('userName')
-//   var email = document.getElementById('email')
-//   var password = document.getElementById('password')
-// console.log(userName.value);
-// console.log( email.value);
-// console.log( password.value);
-// });
+    // Create a new user in Firestore
+  } catch (error) {
+    if (userName==="" || email==="" || password==="") {
+      alert("Please fill all Fields");
+    }
+    else if(password.length <6){
+      alert("password should be at least 6 characters");
+    }
+    else if (error.message === "Firebase: Error (auth/email-already-in-use)."){
+      alert("this email already in use");
+    }
+    else{
+alert("account created successfully");
+    }
+    console.log("error", error);
+    // const errorCode = error.code;
+    // const errorMessage = error.message;
+  }
+}
