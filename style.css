@@ -1,13 +1,27 @@
 body{
     overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.item{
-    width: 300px;
-    position: absolute;
-    top: 20%;
-    left: 30%;
+.item-container {
+    margin: 0% auto;
+    display: flex;
+flex-wrap: wrap;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
-.addItemParent{
-cursor: pointer;
+.item-div{
+    border: 3px solid rgb(222, 221, 221);
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+}
+.img-div {
+   width: -webkit-fill-available;
+   height: 270px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
 }

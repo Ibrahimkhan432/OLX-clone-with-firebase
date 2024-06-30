@@ -3,8 +3,8 @@ onAuthStateChanged(auth, (user) => {
   console.log("user: ", user);
 
   if (user) {
-    window.location.href = "../uploadproduct/uploadproduct.html";
+    // window.location.href = "./pages/signup/signup.html";
   } else {
-    window.location.href = "pages/login/login.html";
+
   }
 });
