@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { auth } from "./firebase.js";
+import { auth,db } from "./firebase.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getDatabase,

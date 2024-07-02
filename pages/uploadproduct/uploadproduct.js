@@ -3,9 +3,8 @@ import {
   ref,
   push,
   set,
-
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-import { auth, db } from "../../js/firebase.js";
+import { auth,db } from "../../js/firebase.js";
 
 var productImg = document.getElementById("productImg");
 var productTitle = document.getElementById("productTitle");
