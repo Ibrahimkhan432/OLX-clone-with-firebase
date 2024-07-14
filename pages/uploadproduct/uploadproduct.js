@@ -4,12 +4,17 @@ import {
   push,
   set,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-import { auth,db } from "../../js/firebase.js";
+import {
+  signOut,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { auth, db } from "../../js/firebase.js";
 
 var productImg = document.getElementById("productImg");
 var productTitle = document.getElementById("productTitle");
 var productPrice = document.getElementById("productPrice");
 var productDescription = document.getElementById("productDescription");
+const logOutBtn = document.getElementById("logoutBtn");
 
 window.uploadProduct = function () {
   var obj = {
@@ -20,7 +25,12 @@ window.uploadProduct = function () {
   };
   console.log(obj);
 
-  if (!obj.productImg || !obj.productTitle || !obj.productPrice || !obj.productDescription) {
+  if (
+    !obj.productImg ||
+    !obj.productTitle ||
+    !obj.productPrice ||
+    !obj.productDescription
+  ) {
     alert("All fields are required. Please fill in all the fields.");
     return;
   }
@@ -36,18 +46,22 @@ window.uploadProduct = function () {
     .catch(function () {});
 };
 
-const logout = async () =>{
+//signOut
+const logout = async (event) => {
+ try {
+   event.preventDefault()
+   const res = await signOut(auth);
+   // Sign-out successful.
+   console.log("Sign-out successful:", res);
+  //  window.location.assign("../login/login.html");
+   
+    // .catch((error) => {
+   //   // An error happened.
+   //   console.log(error);
+ } catch (error) {
+  console.log("🚀 ~ error:", error)
+  
+ }
+};
 
-await signOut(auth)
-.then(() => {
-  // Sign-out successful.
-  console.log("Sign-out successful.");
-  window.location.assign("../pages/signup/signup.html");
-  }).catch((error) => {
-    // An error happened.
-    console.log(error);
-    });
-    
-}
-logoutBtn.addEventListener("click",logout);
-
+logOutBtn.addEventListener("click", logout);
